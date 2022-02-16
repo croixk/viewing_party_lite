@@ -13,6 +13,8 @@ RSpec.describe 'User new page' do
 
   it 'has a form for new users - authentication' do
     visit register_path
+    fill_in("name", with: "name_1")
+    fill_in("email", with: "email_1")
     fill_in("username", with: "username_1")
     fill_in("password", with: "password_1")
     click_button "Register"

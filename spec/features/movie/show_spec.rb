@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Movie show page' do
   it "has link for movie, takes to movie show page" do
     VCR.use_cassette('movie_show_data_from_api') do
-      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com')
+      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com', username: 'username_1', password: 'password_1')
 
       visit "/users/#{user_1.id}/discover"
 
@@ -18,7 +18,7 @@ RSpec.describe 'Movie show page' do
 
   it "has movie attributes" do
     VCR.use_cassette('movie_show_2_data_from_api') do
-      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com')
+      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com', username: 'username_1', password: 'password_1')
       visit "/users/#{user_1.id}/discover"
 
       fill_in(:keyword, with: "Fight")
@@ -41,7 +41,7 @@ RSpec.describe 'Movie show page' do
 
   it "has a return to discover index page button" do
     VCR.use_cassette('movie_data_3_from_api') do
-      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com')
+      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com', username: 'username_1', password: 'password_1')
       visit "/users/#{user_1.id}/movies/550"
       expect(page).to have_button("Discover Page")
 
@@ -52,7 +52,7 @@ RSpec.describe 'Movie show page' do
 
   it "has a button to create a viewing party" do
     VCR.use_cassette('movie_show_4_data_from_api') do
-      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com')
+      user_1 = User.create!(name: 'User 1', email: 'email1@gmail.com', username: 'username_1', password: 'password_1')
       visit "/users/#{user_1.id}/movies/550"
 
       expect(page).to have_button("Create Viewing Party")
