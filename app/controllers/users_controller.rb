@@ -19,13 +19,21 @@ class UsersController < ApplicationController
   end
 
   def new
-
   end
 
   def create
-    @user = User.new(user_params)
-    @user.save
-    redirect_to user_path(@user)
+
+    if params[:password].nil? == false && params[:password] == params[:password_confirmation]
+      @user = User.new(user_params)
+      @user.save
+      redirect_to user_path(@user)
+    else
+      redirect_to '/register'
+      flash[:alert] = "Passwords must match and not be empty"
+      # redirect_to user_path(@user)
+    end
+
+
   end
 
   private
