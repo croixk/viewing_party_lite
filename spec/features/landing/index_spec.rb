@@ -17,12 +17,11 @@ RSpec.describe 'Landing index page' do
     user = User.create(name: 'name_1', email: 'email_1', username: 'username_1', password: 'password_1')
 
     visit '/'
-    click_button 'I already have an account'
+    click_button 'Log In'
     expect(current_path).to eq(login_path)
-    fill_in :username, with: user.name
-    fill_in :username, with: user.email
+
     fill_in :username, with: user.username
-    fill_in :username, with: user.password
+    fill_in :password, with: user.password
 
     click_on 'Log In'
 

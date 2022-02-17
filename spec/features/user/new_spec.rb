@@ -33,7 +33,6 @@ RSpec.describe 'User new page' do
       fill_in("password", with: "password_1")
       fill_in("password_confirmation", with: "")
       click_button "Register"
-      save_and_open_page
       expect(flash[:password]).to eq("Passwords must match and not be empty")
       ### how to test for flash message?
     end
