@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
 
+  def login_form
+
+  end
+
+  def login
+    user = User.find_by(username: params[:username])
+    flash[:success] = "Welcome, #{user.username}"
+    redirect_to root_path
+  end
 
   def show
      @user = User.find(params[:id])
@@ -19,18 +28,26 @@ class UsersController < ApplicationController
   end
 
   def new
-
   end
 
   def create
-    @user = User.new(user_params)
-    @user.save
-    redirect_to user_path(@user)
+
+    if params[:password].nil? == false && params[:password] == params[:password_confirmation]
+      @user = User.new(user_params)
+      @user.save
+      redirect_to user_path(@user)
+    else
+      redirect_to '/register'
+      flash[:alert] = "Passwords must match and not be empty"
+      # redirect_to user_path(@user)
+    end
+
+
   end
 
   private
 
   def user_params
-    params.permit(:name, :email)
+    params.permit(:name, :email, :username, :password)
   end
 end
