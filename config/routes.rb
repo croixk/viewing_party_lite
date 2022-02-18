@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :parties
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :admin do 
+    get '/dashboard', to: 'dashboard#index'
+  end
+
   root 'landing#index'
   get '/register', to: 'users#new'
   get '/login', to: 'users#login_form'

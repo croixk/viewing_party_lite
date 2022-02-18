@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(version: 2022_02_18_050447) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "password_digest"
-    t.string "name"
-    t.string "email"
     t.integer "role"
   end
 
