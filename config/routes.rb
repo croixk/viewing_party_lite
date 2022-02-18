@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   get '/login', to: 'users#login_form'
   post '/login', to: 'users#login'
-
+  get '/dashboard', to: 'users#show'
+  get '/movies/:movie_id/parties/new', to: 'parties#new'
+  post '/movies/:movie_id/parties', to: 'parties#create'
 
   # get '/users', to: 'users#show'
-  resources :users, only: [:show, :create ] do
-    resources :user_parties, only: [:create]
+  resources :users, only: [:create ] do
+    # resources :user_parties, only: [:create]
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show] do
       resources :parties, only: [:show, :new, :create]

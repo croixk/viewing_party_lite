@@ -7,7 +7,7 @@ class PartiesController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: session[:user_id])
     @users = User.all
     @movie_id = params[:movie_id]
     conn = Faraday.new(url: "https://api.themoviedb.org") do |faraday|
@@ -20,7 +20,7 @@ class PartiesController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: session[:user_id])
 
     @party = @user.parties.create!(party_params)
 
@@ -28,13 +28,13 @@ class PartiesController < ApplicationController
 
     @user.save
 
-    redirect_to "/users/#{@user.id}"
+    redirect_to "/dashboard"
 
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-  
+
 
     # Only allow a list of trusted parameters through.
     def party_params

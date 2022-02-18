@@ -20,7 +20,7 @@ RSpec.describe 'User new page' do
       fill_in("password_confirmation", with: "password_1")
       click_button "Register"
       expected = User.last
-      expect(current_path).to eq("/users/#{expected.id}")
+      expect(current_path).to eq("/dashboard")
     end
   end
 

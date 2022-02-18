@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 /coverage
+/coverage/.last_run.json
+/coverage/.resultset.json
+/coverage/index.html
 
 # Ignore uploaded files in development
 /storage/*

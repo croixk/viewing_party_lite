@@ -6,12 +6,18 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: params[:username])
-    flash[:success] = "Welcome, #{user.username}"
-    redirect_to root_path
+    if user.authenticate(params[:password])
+      session[:user_id] = user.id
+      flash[:success] = "Welcome, #{user.username}"
+      redirect_to root_path
+    else
+      flash[:error] = "Sorry, your credentials are bad"
+      render :login_form
+    end
   end
 
   def show
-     @user = User.find(params[:id])
+     @user = User.find_by(id: session[:user_id])
      @movies = []
      @user.parties.each do |party|
 
@@ -35,7 +41,8 @@ class UsersController < ApplicationController
     if params[:password].nil? == false && params[:password] == params[:password_confirmation]
       @user = User.new(user_params)
       @user.save
-      redirect_to user_path(@user)
+      session[:user_id] = @user.id
+      redirect_to '/dashboard'
     else
       redirect_to '/register'
       flash[:alert] = "Passwords must match and not be empty"
